@@ -9,7 +9,10 @@ server = ["server"]
 
 [workspace.dependencies]
 axum = "0.7.9"
+serde_json = "1.0.104"
 tokio = { version = "1.42.0", features = ["full"] }
+tracing = "0.1.37"
+tracing-subscriber = "0.3.17"
 
 [dependencies]
 server = { path = "server" }
