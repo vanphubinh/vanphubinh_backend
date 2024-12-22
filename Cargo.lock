@@ -258,6 +258,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "interface"
+version = "0.1.0"
+dependencies = [
+ "axum",
+ "serde_json",
+]
+
+[[package]]
 name = "itoa"
 version = "1.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -511,6 +519,7 @@ name = "server"
 version = "0.1.0"
 dependencies = [
  "axum",
+ "interface",
  "serde_json",
  "tokio",
  "tracing",

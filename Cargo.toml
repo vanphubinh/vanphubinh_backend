@@ -7,9 +7,14 @@ edition = "2021"
 [members]
 server = ["server"]
 
+[workspace]
+members = ["interface"]
+
 [workspace.dependencies]
 axum = "0.7.9"
-serde_json = "1.0.104"
+serde = { version = "1.0.215", features = ["derive"] }
+short-uuid = "0.1.4"
+serde_json = "1.0.133"
 tokio = { version = "1.42.0", features = ["full"] }
 tracing = "0.1.37"
 tracing-subscriber = "0.3.17"

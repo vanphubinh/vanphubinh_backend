@@ -1,4 +1,4 @@
-use axum::{http::StatusCode, response::IntoResponse, routing::get, Json, Router};
+use axum::Router;
 use std::net::SocketAddr;
 use tokio::net::TcpListener;
 
@@ -6,9 +6,7 @@ use tokio::net::TcpListener;
 pub async fn start() {
   tracing_subscriber::fmt::init();
 
-  let app = Router::new()
-    .route("/", get(root))
-    .route("/complex", get(complex));
+  let app = Router::new().merge(interface::new());
 
   let port: u16 = std::env::var("PORT")
     .unwrap_or("3000".into())
@@ -21,17 +19,4 @@ pub async fn start() {
   tracing::info!("Listening on IPv6 at {}!", ipv6);
 
   axum::serve(ipv6_listener, app).await.unwrap();
-}
-
-async fn root() -> &'static str {
-  "Hello, World!"
-}
-
-async fn complex() -> impl IntoResponse {
-  (
-    StatusCode::OK,
-    Json(serde_json::json!({
-        "message": "Hello, World!"
-    })),
-  )
 }
