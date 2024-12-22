@@ -485,6 +485,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "server"
+version = "0.1.0"
+dependencies = [
+ "axum",
+ "tokio",
+]
+
+[[package]]
 name = "signal-hook-registry"
 version = "1.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -613,8 +621,7 @@ checksum = "adb9e6ca4f869e1180728b7950e35922a7fc6397f7b641499e8f3ef06e50dc83"
 name = "vanphubinh_backend"
 version = "0.1.0"
 dependencies = [
- "axum",
- "tokio",
+ "server",
 ]
 
 [[package]]

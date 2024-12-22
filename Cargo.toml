@@ -3,6 +3,13 @@ name = "vanphubinh_backend"
 version = "0.1.0"
 edition = "2021"
 
-[dependencies]
+
+[members]
+server = ["server"]
+
+[workspace.dependencies]
 axum = "0.7.9"
 tokio = { version = "1.42.0", features = ["full"] }
+
+[dependencies]
+server = { path = "server" }
