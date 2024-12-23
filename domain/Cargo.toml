@@ -1,14 +1,16 @@
 [package]
-name = "infra"
+name = "domain"
 version = "0.1.0"
 edition = "2021"
 
 [lib]
-name = "infra"
+name = "domain"
 path = "src/lib.rs"
 
 [dependencies]
+chrono = { workspace = true }
 sea-orm = { workspace = true }
 serde = { workspace = true }
 short-uuid = { workspace = true }
-uuid = { workspace = true }
+
+infra = { path = "../infra" }
