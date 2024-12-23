@@ -1,11 +1,7 @@
 use axum::async_trait;
-use sea_orm::ConnectionTrait;
 
 #[async_trait]
-pub trait InvokableUsecase<T>
-where
-  T: ConnectionTrait,
-{
+pub trait InvokableUsecase {
   type Error;
   type Output;
   type Params;

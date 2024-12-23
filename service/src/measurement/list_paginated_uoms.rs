@@ -14,7 +14,7 @@ pub struct ListPaginatedUomsUsecase {
 }
 
 #[async_trait]
-impl InvokableUsecase<DatabaseConnection> for ListPaginatedUomsUsecase {
+impl InvokableUsecase for ListPaginatedUomsUsecase {
   type Error = ListPaginatedUomsError;
   type Output = (Vec<uom::PartialModel>, PaginationMeta);
   type Params = ListPaginatedUomsParams;
