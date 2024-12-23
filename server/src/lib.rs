@@ -1,6 +1,6 @@
 use std::{net::SocketAddr, sync::Arc};
 
-use axum::Router;
+use axum::{http::StatusCode, routing::get, Router};
 use infra::state::AppState;
 use interface::uom::route::UomRouter;
 use sea_orm::{Database, DatabaseConnection, DbErr};
@@ -28,8 +28,11 @@ pub async fn start() {
   let app_state = Arc::new(AppState::new(db));
 
   let app = Router::new()
+    .route("/", get(|| async { "This is API of Van Phu Binh" }))
     .merge(UomRouter::new())
     .with_state(app_state.clone());
+
+  let app = app.fallback((StatusCode::NOT_FOUND, "Not found"));
 
   let port: u16 = std::env::var("PORT")
     .unwrap_or("3000".into())
