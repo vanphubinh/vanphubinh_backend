@@ -2,6 +2,7 @@ use std::{net::SocketAddr, sync::Arc};
 
 use axum::Router;
 use infra::state::AppState;
+use interface::uom::route::UomRouter;
 use sea_orm::{Database, DatabaseConnection, DbErr};
 use tokio::net::TcpListener;
 
@@ -27,7 +28,7 @@ pub async fn start() {
   let app_state = Arc::new(AppState::new(db));
 
   let app = Router::new()
-    .merge(interface::uom::route::UomRouter::new())
+    .merge(UomRouter::new())
     .with_state(app_state.clone());
 
   let port: u16 = std::env::var("PORT")

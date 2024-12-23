@@ -3,6 +3,7 @@ use std::sync::Arc;
 use axum::extract::{Query, State};
 use axum_macros::debug_handler;
 use domain::measurement::uom::PartialModel as Uom;
+use infra::usecase::InvokableUsecase;
 use infra::{response::PaginatedResponse, state::AppState};
 use service::measurement::list_paginated_uoms::{
   ListPaginatedUomsError, ListPaginatedUomsParams, ListPaginatedUomsUsecase,
@@ -14,11 +15,10 @@ pub async fn list_paginated_uoms(
   Query(query): Query<ListPaginatedUomsParams>,
 ) -> Result<PaginatedResponse<Uom>, ListPaginatedUomsError> {
   let usecase = ListPaginatedUomsUsecase {
-    page: Some(query.page.unwrap_or(1)),
-    per_page: Some(query.per_page.unwrap_or(30)),
+    db: state.db.clone(),
   };
 
-  let (uoms, meta) = usecase.invoke(state.db.clone()).await?;
+  let (uoms, meta) = usecase.invoke(query).await?;
 
   Ok(PaginatedResponse::<Uom> {
     ok: true,
