@@ -8,6 +8,8 @@ name = "infra"
 path = "src/lib.rs"
 
 [dependencies]
+async-trait = { workspace = true }
+axum = { workspace = true }
 sea-orm = { workspace = true }
 serde = { workspace = true }
 short-uuid = { workspace = true }

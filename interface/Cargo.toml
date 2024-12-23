@@ -5,4 +5,9 @@ edition = "2021"
 
 [dependencies]
 axum = { workspace = true }
+axum-macros = { workspace = true }
 serde_json = { workspace = true }
+
+service = { path = "../service" }
+infra = { path = "../infra" }
+domain = { path = "../domain" }

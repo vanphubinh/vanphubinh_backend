@@ -26,7 +26,9 @@ pub async fn start() {
 
   let app_state = Arc::new(AppState::new(db));
 
-  let app = Router::new().with_state(app_state.clone());
+  let app = Router::new()
+    .merge(interface::uom::route::UomRouter::new())
+    .with_state(app_state.clone());
 
   let port: u16 = std::env::var("PORT")
     .unwrap_or("3000".into())

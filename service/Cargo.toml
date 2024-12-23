@@ -1,0 +1,19 @@
+[package]
+name = "service"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "service"
+path = "src/lib.rs"
+
+[dependencies]
+async-trait = { workspace = true }
+axum = { workspace = true }
+serde = { workspace = true }
+sea-orm = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+
+infra = { path = "../infra" }
+domain = { path = "../domain" }
