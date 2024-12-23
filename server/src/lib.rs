@@ -4,6 +4,8 @@ use tokio::net::TcpListener;
 
 #[tokio::main]
 pub async fn start() {
+  dotenvy::dotenv().ok();
+
   tracing_subscriber::fmt::init();
 
   let app = Router::new().merge(interface::new());
