@@ -1362,6 +1362,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "infra"
+version = "0.1.0"
+dependencies = [
+ "sea-orm",
+]
+
+[[package]]
 name = "inherent"
 version = "1.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2422,6 +2429,7 @@ version = "0.1.0"
 dependencies = [
  "axum",
  "dotenvy",
+ "infra",
  "interface",
  "sea-orm",
  "serde_json",

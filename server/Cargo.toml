@@ -13,3 +13,4 @@ tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 
 interface = { path = "../interface" }
+infra = { path = "../infra" }

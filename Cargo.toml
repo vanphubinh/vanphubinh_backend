@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [workspace]
-members = [".", "migration", "interface"]
+members = [".", "migration", "interface", "infra"]
 
 [workspace.dependencies]
 axum = "0.7.9"
