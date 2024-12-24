@@ -61,16 +61,16 @@ where
 //   }
 // }
 
-// #[derive(Serialize)]
-// pub struct OkResponse {
-//   pub ok: bool,
-// }
+#[derive(Serialize)]
+pub struct OkResponse {
+  pub ok: bool,
+}
 
-// impl IntoResponse for OkResponse {
-//   fn into_response(self) -> Response {
-//     Json(self).into_response()
-//   }
-// }
+impl IntoResponse for OkResponse {
+  fn into_response(self) -> Response {
+    Json(self).into_response()
+  }
+}
 
 // #[derive(Debug, Clone, Serialize)]
 // #[serde(rename_all = "camelCase")]
