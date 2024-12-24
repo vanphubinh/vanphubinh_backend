@@ -23,6 +23,7 @@ short-uuid = "0.1.4"
 serde_json = "1.0.133"
 thiserror = "2.0.3"
 tokio = { version = "1.42.0", features = ["full"] }
+tower-http = { version = "0.6.2", features = ["full"] }
 tracing = "0.1.37"
 tracing-subscriber = "0.3.17"
 uuid = { version = "1.11.0", features = [

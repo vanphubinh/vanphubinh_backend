@@ -1,16 +1,28 @@
 use std::{net::SocketAddr, sync::Arc};
 
-use axum::{http::StatusCode, routing::get, Router};
+use axum::{
+  http::{header::CONTENT_TYPE, Method, StatusCode},
+  routing::get,
+  Router,
+};
 use infra::state::AppState;
 use interface::uom::route::UomRouter;
 use sea_orm::{Database, DatabaseConnection, DbErr};
 use tokio::net::TcpListener;
+use tower_http::{
+  cors::{Any, CorsLayer},
+  trace::{self, TraceLayer},
+};
+use tracing::Level;
 
 #[tokio::main]
 pub async fn start() {
   dotenvy::dotenv().ok();
 
-  tracing_subscriber::fmt::init();
+  tracing_subscriber::fmt()
+    .with_max_level(tracing::Level::DEBUG)
+    .with_test_writer()
+    .init();
 
   tracing::info!("Connecting to database...");
 
@@ -25,11 +37,26 @@ pub async fn start() {
     }
   };
 
+  let cors = CorsLayer::new()
+    .allow_methods([
+      Method::GET,
+      Method::POST,
+      Method::OPTIONS,
+      Method::PUT,
+      Method::DELETE,
+    ])
+    .allow_origin(Any)
+    .allow_headers([CONTENT_TYPE]);
+
   let app_state = Arc::new(AppState::new(db));
 
   let app = Router::new()
     .route("/", get(|| async { "This is API of Van Phu Binh" }))
     .merge(UomRouter::new())
+    .layer(cors)
+    .layer(
+      TraceLayer::new_for_http().make_span_with(trace::DefaultMakeSpan::new().level(Level::INFO)),
+    )
     .with_state(app_state.clone());
 
   let app = app.fallback((StatusCode::NOT_FOUND, "Not found"));
