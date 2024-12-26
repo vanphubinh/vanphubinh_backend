@@ -6,7 +6,7 @@ use axum::{
   Router,
 };
 use infra::state::AppState;
-use interface::uom::route::UomRouter;
+use interface::{category::route::CategoryRouter, uom::route::UomRouter};
 use sea_orm::{Database, DatabaseConnection, DbErr};
 use tokio::net::TcpListener;
 use tower_http::{
@@ -53,6 +53,7 @@ pub async fn start() {
   let app = Router::new()
     .route("/", get(|| async { "This is API of Van Phu Binh" }))
     .merge(UomRouter::new())
+    .merge(CategoryRouter::new())
     .layer(cors)
     .layer(
       TraceLayer::new_for_http().make_span_with(trace::DefaultMakeSpan::new().level(Level::INFO)),
